@@ -11,11 +11,11 @@ emitter = new EventEmitter2
   maxListeners: 20
 emitter.onAny ->
   Socket.send JSON.stringify [@event].concat arguments
-Socket.onopen ->
+Socket.onopen = ->
   emitter.emit 'socket.open'
-Socket.onclose ->
+Socket.onclose = ->
   emitter.emit 'socket.close'
-Socket.onmessage (e) ->
+Socket.onmessage = (e) ->
   [command, args] = JSON.parse e.data
   emitter[command].apply emitter, args
 
