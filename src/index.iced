@@ -10,11 +10,11 @@ module.exports = ->
     constructor: ->
       super
     on: (event, args...) ->
-      if event isnt 'socket.open'
+      if event isnt 'socket.open' and event isnt 'socket.close'
         Socket.send JSON.stringify ['subscribe', event]
       super
     off: (event, callback) ->
-      if event isnt 'socket.open'
+      if event isnt 'socket.open' and event isnt 'socket.close'
         Socket.send JSON.stringify ['unsubscribe', event]
   emitter = new ProxyEmitter
     wildcard: true
