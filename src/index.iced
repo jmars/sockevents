@@ -10,9 +10,6 @@ module.exports = ->
     constructor: ->
       super
     on: (event, args...) ->
-      Socket.send JSON.stringify ['subscribe', event]
-      super
-    once: (event, args...) ->
       if event isnt 'socket.open'
         Socket.send JSON.stringify ['subscribe', event]
       super
