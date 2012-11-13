@@ -11,7 +11,7 @@ module.exports = ->
     delimiter: '.'
     maxListeners: 20
   emitter.onAny ->
-    Socket.send JSON.stringify ['emit', @event].concat arguments
+    Socket.send JSON.stringify ['propagate', @event].concat arguments
   Socket.onopen = ->
     emitter.emit 'socket.open'
   Socket.onclose = ->
