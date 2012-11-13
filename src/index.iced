@@ -1,5 +1,5 @@
 Socket = require 'sockjs-client'
-{EventEmitter2} = require 'eventemitter2'
+{EventEmitter2} = require 'EventEmitter2'
 
 if SERVER?
   Socket = new WebSocket "ws://#{window.location.hostname}:3000"
