@@ -13,7 +13,8 @@ module.exports = ->
       Socket.send JSON.stringify ['subscribe', event]
       super
     once: (event, args...) ->
-      Socket.send JSON.stringify ['subscribe', event]
+      if event isnt 'socket.open'
+        Socket.send JSON.stringify ['subscribe', event]
       super
     off: (event, callback) ->
       Socket.send JSON.stringify ['unsubscribe', event]
