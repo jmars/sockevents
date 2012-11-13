@@ -1,0 +1,16 @@
+{
+  "name": "sockevents",
+  "repo": "jmars/sockevents",
+  "description": "Shared eventemitter with portmanteau",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "jmars/EventEmitter2":"*",
+    "jmars/sockjs-client":"*"
+  },
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}
