@@ -6,6 +6,7 @@ module.exports = ->
     Socket = new WebSocket "ws://#{window.location.hostname}:3000"
   else
     Socket = new SockJS "http://#{window.location.hostname}:3000/socket"
+  fromServer = false
   class ProxyEmitter extends EventEmitter2
     constructor: ->
       super
@@ -21,12 +22,16 @@ module.exports = ->
     delimiter: '.'
     maxListeners: 20
   emitter.onAny (args...) ->
-    Socket.send JSON.stringify ['propagate', [@event].concat(args)]
+    if !fromServer
+      Socket.send JSON.stringify ['propagate', [@event].concat(args)]
+    else
+      fromServer = false
   Socket.onopen = ->
     emitter.emit 'socket.open'
   Socket.onclose = ->
     emitter.emit 'socket.close'
   Socket.onmessage = (e) ->
+    fromServer = true
     [command, args...] = JSON.parse e.data
     emitter[command].apply emitter, args
   return emitter
