@@ -27,6 +27,6 @@ module.exports = ->
   Socket.onclose = ->
     emitter.emit 'socket.close'
   Socket.onmessage = (e) ->
-    [command, args] = JSON.parse e.data
+    [command, args...] = JSON.parse e.data
     emitter[command].apply emitter, args
   return emitter
