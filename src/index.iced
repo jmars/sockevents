@@ -11,7 +11,7 @@ class ProxyEmitter extends EventEmitter2
   constructor: ->
     super
   on: (event, cb) ->
-    if event is socket.open and open
+    if event is 'socket.open' and open
       do cb
     if event isnt 'socket.open' and event isnt 'socket.close'
       Socket.send JSON.stringify ['subscribe', event]
